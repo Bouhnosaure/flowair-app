@@ -1,0 +1,49 @@
+<ion-view view-title="Mon jardin">
+    <ion-content has-header="true" padding="true">
+
+        <ion-refresher
+                pulling-text="Tirer pour rafraîchir..."
+                on-refresh="doRefresh()">
+        </ion-refresher>
+
+        <h1>{{flower.alias}}</h1>
+        <h5>dernière mise à jour {{flower.current['updated']}}</h5>
+
+        <div class="list card">
+            <div class="item-thumbnail-left ">
+                <img ng-src="{{flower.photo}}">
+                Nom de la plante : {{flower.commonName}} <br/>
+                Nom scientifique : {{flower.scientificName}} <br/>
+                Type de la plante : {{flower.category}}
+            </div>
+        </div>
+
+        <div class="list card">
+            <div class="item item-divider">Température</div>
+            <div class="item item-body {{flower.notification[0]['temperature'][0]}}">
+                {{flower.notification[0]['temperature'][1]}}
+            </div>
+        </div>
+
+        <div class="list card">
+            <div class="item item-divider">Luminosité</div>
+            <div class="item item-body {{flower.notification[1]['enlightment'][0]}}">
+                {{flower.notification[1]['enlightment'][1]}}
+            </div>
+        </div>
+
+        <div class="list card">
+            <div class="item item-divider">Humidité</div>
+            <div class="item item-body {{flower.notification[2]['moisture'][0]}}">
+                {{flower.notification[2]['moisture'][1]}}
+            </div>
+        </div>
+
+        <div class="button-bar">
+            <a href="#/app/garden/{{GardenItemId}}" class="button button-calm active">Infos</a>
+            <a href="#/app/garden/{{GardenItemId}}/stats" class="button button-calm">Stats</a>
+            <a href="#/app/garden/{{GardenItemId}}/edit" class="button button-calm">Edition</a>
+        </div>
+
+    </ion-content>
+</ion-view>

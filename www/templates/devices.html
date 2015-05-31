@@ -1,0 +1,19 @@
+<ion-view view-title="Nouveau Capteur">
+    <ion-content has-header="true" padding="true">
+
+        <h1>Choix d'un capteur Flowair</h1>
+
+        <ion-refresher
+                pulling-text="Tirer pour rafraîchir..."
+                on-refresh="doRefresh()">
+        </ion-refresher>
+
+        <ion-list>
+            <ion-item ng-repeat="device in devices" href="#/app/flowers/{{device.ip}}">
+                Ip : {{device.ip}}
+                <span class="item-note">Mise a jour {{device.updated}}</span>
+            </ion-item>
+        </ion-list>
+
+    </ion-content>
+</ion-view>

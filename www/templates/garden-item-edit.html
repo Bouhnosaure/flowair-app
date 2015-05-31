@@ -1,0 +1,28 @@
+<ion-view view-title="Editer une plante">
+    <ion-content has-header="true" padding="true">
+
+        <h1>Editer les informations</h1>
+
+        <form name="flowerForm" novalidate="" ng-submit="editFlower(flowerForm)">
+
+            <div class="list card">
+                <div class="item item-divider positive">Donnez un nom à votre plante !</div>
+            </div>
+
+            <label class="item item-input" ng-class="{ 'has-error' : flowerForm.alias.$invalid}">
+                <span class="input-label">Alias</span>
+                <input type="text" name="alias" placeholder="{{flower.alias}}" ng-model="flowerData.alias" ng-minlength="3" ng-maxlength="50" required>
+            </label>
+
+            <div ng-messages="flowerForm.alias.$error">
+                <div ng-message="required">L'alias de la plante est requis</div>
+                <div ng-messages-include="templates/form-errors.html"></div>
+            </div>
+
+            <div class="padding">
+                <button class="button button-block button-positive">Editer !</button>
+            </div>
+
+        </form>
+    </ion-content>
+</ion-view>
