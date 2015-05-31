@@ -49,7 +49,7 @@ angular.module('flowair.controllers', [])
         };
 
         $scope.show = function (id_flower) {
-            var hideSheet = $ionicActionSheet.show({
+            $ionicActionSheet.show({
                 titleText: 'Que souhaitez vous faire ?',
                 destructiveText: 'Supprimer ma plante',
                 cancelText: 'Annuler',
