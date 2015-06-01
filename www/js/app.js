@@ -6,7 +6,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('flowair', ['ionic', 'ngCordova', 'ngMessages', 'angles','flowair.controllers', 'flowair.services'])
+angular.module('flowair', ['ionic', 'ngCordova', 'ngMessages', 'nvd3ChartDirectives','flowair.controllers', 'flowair.services'])
 
     .run(function ($ionicPlatform, $rootScope) {
 
@@ -39,7 +39,7 @@ angular.module('flowair', ['ionic', 'ngCordova', 'ngMessages', 'angles','flowair
         $stateProvider
 
             //conteneur principal des vues
-            //c'est pour ça qu'il est abstract
+            //c'est pour ï¿½a qu'il est abstract
             .state('app', {
                 url: "/app",
                 abstract: true,
@@ -108,7 +108,7 @@ angular.module('flowair', ['ionic', 'ngCordova', 'ngMessages', 'angles','flowair
             })
 
 
-            //mes devices connectés pour ajouer une fleur
+            //mes devices connectï¿½s pour ajouer une fleur
             .state('app.devices', {
                 cache: false,
                 url: "/devices",
@@ -143,18 +143,6 @@ angular.module('flowair', ['ionic', 'ngCordova', 'ngMessages', 'angles','flowair
                 }
             })
 
-
-            //mes notifications vis a vis de mes plantes
-            .state('app.notifications', {
-                cache: false,
-                url: "/notifications",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/notifications.html",
-                        controller: 'NotificationsCtrl'
-                    }
-                }
-            })
 
             //A propos
             .state('app.about', {

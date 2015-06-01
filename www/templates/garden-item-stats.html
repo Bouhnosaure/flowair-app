@@ -9,7 +9,47 @@
         <h1>{{flower.alias}}</h1>
         <h5>dernière mise à jour {{flower.current['updated']}}</h5>
 
-        <canvas linechart options="options" data="chart" width="700" height="400"></canvas>
+        <div class="list card">
+            <div class="item item-divider">Temperature (C°)</div>
+            <div class="item item-body">
+                <nvd3-stacked-area-chart
+                        data="dataTemperature"
+                        height="350"
+                        showXAxis="true"
+                        showYAxis="true"
+                        color="colorTemperature()"
+                        xAxisTickFormat="xAxisTickFormatFunction()">
+                </nvd3-stacked-area-chart>
+            </div>
+        </div>
+
+        <div class="list card">
+            <div class="item item-divider">Humidité (%)</div>
+            <div class="item item-body">
+                <nvd3-stacked-area-chart
+                        data="dataMoisture"
+                        height="350"
+                        showXAxis="true"
+                        showYAxis="true"
+                        color="colorMoisture()"
+                        xAxisTickFormat="xAxisTickFormatFunction()">
+                </nvd3-stacked-area-chart>
+            </div>
+        </div>
+
+        <div class="list card">
+            <div class="item item-divider">Luminosité (lumen)</div>
+            <div class="item item-body">
+                <nvd3-stacked-area-chart
+                        data="dataBrightness"
+                        height="350"
+                        showXAxis="true"
+                        showYAxis="true"
+                        color="colorBrightness()"
+                        xAxisTickFormat="xAxisTickFormatFunction()">
+                </nvd3-stacked-area-chart>
+            </div>
+        </div>
 
         <div class="button-bar">
             <a href="#/app/garden/{{GardenItemId}}" class="button button-calm">Infos</a>

@@ -123,53 +123,56 @@ angular.module('flowair.controllers', [])
             var chartTemperature = [];
             var chartBrightness = [];
             var chartMoisture = [];
-            var labels = [];
 
             for (var key in stats) {
                 if (stats.hasOwnProperty(key)) {
-                    chartTemperature.push(stats[key].temperature);
-                    chartBrightness.push(stats[key].brightness);
-                    chartMoisture.push(stats[key].moisture);
-                    labels.push(stats[key].datetime);
-                    console.log(stats[key]);
+                    chartTemperature.push([moment(stats[key].datetime), stats[key].temperature]);
+                    chartBrightness.push([moment(stats[key].datetime), stats[key].brightness]);
+                    chartMoisture.push([moment(stats[key].datetime), stats[key].moisture]);
                 }
             }
 
-            $scope.chart = {
-                labels: labels,
-                datasets: [
-                    {
-                        label: "Temperature",
-                        fillColor: "rgba(220,220,220,0.2)",
-                        strokeColor: "rgba(220,220,220,1)",
-                        pointColor: "rgba(220,220,220,1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(220,220,220,1)",
-                        data: chartTemperature
-                    },
-                    {
-                        label: "Luminosité",
-                        fillColor: "rgba(151,187,205,0.2)",
-                        strokeColor: "rgba(151,187,205,1)",
-                        pointColor: "rgba(151,187,205,1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(151,187,205,1)",
-                        data: chartBrightness
-                    },
-                    {
-                        label: "Humidité",
-                        fillColor: "rgba(220,220,220,0.2)",
-                        strokeColor: "rgba(220,220,220,1)",
-                        pointColor: "rgba(220,220,220,1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(220,220,220,1)",
-                        data: chartMoisture
-                    }
-                ]
+            console.log(chartTemperature);
+
+            $scope.xAxisTickFormatFunction = function () {
+                return function (d) {
+                    return d3.time.format('%H:%M')(moment(d).toDate());
+                }
             };
+
+            //Chaleur
+            $scope.dataTemperature = [{
+                "key": "Temperature",
+                "values": chartTemperature
+            }];
+
+            $scope.colorTemperature = function() {
+                return function(d, i) {
+                    return '#e74c3c'
+                };
+            }
+
+            //LuminositÃ©
+            $scope.dataBrightness = [{
+                "key": "HumiditÃ©",
+                "values": chartBrightness
+            }];
+            $scope.colorBrightness = function() {
+                return function(d, i) {
+                    return '#f1c40f'
+                };
+            }
+
+            //HumiditÃ©
+            $scope.dataMoisture = [{
+                "key": "LuminositÃ©",
+                "values": chartMoisture
+            }];
+            $scope.colorMoisture = function() {
+                return function(d, i) {
+                    return '#1abc9c'
+                };
+            }
         };
 
 
@@ -239,7 +242,7 @@ angular.module('flowair.controllers', [])
     /*
      |
      |Liste de toutes le plantes pour en ajouter une
-     |mie en place d'un systeme de cache ou ne pas a avoir aller chercher les données a chaque fois
+     |mie en place d'un systeme de cache ou ne pas a avoir aller chercher les donnï¿½es a chaque fois
      |
      */
     .
@@ -287,15 +290,6 @@ angular.module('flowair.controllers', [])
                 });
             }
         };
-    })
-
-    /*
-     |
-     |Liste de mes notifications
-     |
-     */
-    .controller('NotificationsCtrl', function ($scope) {
-
     })
 
 
