@@ -103,7 +103,7 @@ angular.module('flowair.controllers', [])
      |Une fleur de mon jardin SHOW
      |
      */
-    .controller('GardenItemRealtimeCtrl', function ($scope, $stateParams, $ionicLoading, LocalFlowersService) {
+    .controller('GardenItemRealtimeCtrl', function ($scope, $stateParams, $ionicLoading, $interval, LocalFlowersService) {
         $scope.GardenItemId = $stateParams.GardenItemId;
 
         var updateData = function () {
@@ -111,10 +111,16 @@ angular.module('flowair.controllers', [])
                 $scope.flower = flower.data.data;
             });
         };
-        var timer = setInterval(function () {
-            $scope.$apply(updateData);
-        }, 1000);
-        updateData();
+
+        var promise = $interval(updateData, 1000);
+
+        // Cancel interval on page changes
+        $scope.$on('$destroy', function () {
+            if (angular.isDefined(promise)) {
+                $interval.cancel(promise);
+                promise = undefined;
+            }
+        });
 
     })
 
