@@ -96,6 +96,18 @@ angular.module('flowair', ['ionic', 'ngCordova', 'ngMessages', 'nvd3ChartDirecti
             })
 
             //une plante de mon jardin et ses stats (edit, delete)
+            .state('app.garden-item-realtime', {
+                cache: false,
+                url: "/garden/:GardenItemId/realtime",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/garden-item-realtime.html",
+                        controller: 'GardenItemRealtimeCtrl'
+                    }
+                }
+            })
+
+            //une plante de mon jardin et ses stats (edit, delete)
             .state('app.garden-item-edit', {
                 cache: false,
                 url: "/garden/:GardenItemId/edit",

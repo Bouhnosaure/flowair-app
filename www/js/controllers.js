@@ -100,10 +100,30 @@ angular.module('flowair.controllers', [])
 
     /*
      |
+     |Une fleur de mon jardin SHOW
+     |
+     */
+    .controller('GardenItemRealtimeCtrl', function ($scope, $stateParams, $ionicLoading, LocalFlowersService) {
+        $scope.GardenItemId = $stateParams.GardenItemId;
+
+        var updateData = function () {
+            LocalFlowersService.getFlower($scope.GardenItemId).then(function (flower) {
+                $scope.flower = flower.data.data;
+            });
+        };
+        var timer = setInterval(function () {
+            $scope.$apply(updateData);
+        }, 1000);
+        updateData();
+
+    })
+
+    /*
+     |
      |Une fleur de mon jardin STATS
      |
      */
-    .controller('GardenItemStatsCtrl', function ($scope, $http, $stateParams, $ionicLoading, LocalFlowersService, StatsService) {
+    .controller('GardenItemStatsCtrl', function ($scope, $http, $stateParams, $ionicLoading) {
         $scope.GardenItemId = $stateParams.GardenItemId;
 
         $ionicLoading.show();
@@ -132,44 +152,42 @@ angular.module('flowair.controllers', [])
                 }
             }
 
-            console.log(chartTemperature);
-
             $scope.xAxisTickFormatFunction = function () {
                 return function (d) {
                     return d3.time.format('%H:%M')(moment(d).toDate());
                 }
             };
 
-            //Chaleur
+            //Temperature
             $scope.dataTemperature = [{
                 "key": "Temperature",
                 "values": chartTemperature
             }];
 
-            $scope.colorTemperature = function() {
-                return function(d, i) {
+            $scope.colorTemperature = function () {
+                return function (d, i) {
                     return '#e74c3c'
                 };
             }
 
-            //Luminosité
+            //Brightness
             $scope.dataBrightness = [{
                 "key": "Humidité",
                 "values": chartBrightness
             }];
-            $scope.colorBrightness = function() {
-                return function(d, i) {
+            $scope.colorBrightness = function () {
+                return function (d, i) {
                     return '#f1c40f'
                 };
             }
 
-            //Humidité
+            //Moisture
             $scope.dataMoisture = [{
                 "key": "Luminosité",
                 "values": chartMoisture
             }];
-            $scope.colorMoisture = function() {
-                return function(d, i) {
+            $scope.colorMoisture = function () {
+                return function (d, i) {
                     return '#1abc9c'
                 };
             }
